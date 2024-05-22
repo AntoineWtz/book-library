@@ -9,25 +9,35 @@ interface BookCardProps {
         rating: number;
         genre?: string;
     };
-    toggleReadStatus: (id: number) => void;
-    rateBook: (id: number, rating: number) => void;
+    onToggleRead: (id: number) => void;
+    onRateBook: (id: number, rating: number) => void;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, toggleReadStatus, rateBook }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onRateBook }) => {
+    const { id, title, author, isRead, rating, genre } = book;
+
+    const handleToggleRead = () => {
+        onToggleRead(id);
+    };
+
+    const handleRateBook = (newRating: number) => {
+        onRateBook(id, newRating);
+    };
+
     return (
-        <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white m-4 p-4">
-            <div className="px-6 py-4 text-center">
-                <div className="font-bold text-xl mb-2">{book.title}</div>
-                <p className="text-gray-700 text-base">Author: {book.author}</p>
-                <p className="text-gray-700 text-base">Genre: {book.genre}</p>
-                <p className="text-gray-700 text-base">
-                    Status: <button onClick={() => toggleReadStatus(book.id)} className="text-blue-500 underline">{book.isRead ? 'Read' : 'Unread'}</button>
-                </p>
-                <p className="text-gray-700 text-base">
-                    Rating: {book.rating}
-                    <button onClick={() => rateBook(book.id, book.rating + 1)} className="ml-2 text-blue-500 underline">+1</button>
-                </p>
-            </div>
+        <div className="border border-gray-300 rounded-md p-4 m-2">
+            <h3>{title}</h3>
+            <p>Author: {author}</p>
+            <p>Genre: {genre}</p>
+            <p>Rating: {rating}</p>
+            <button onClick={handleToggleRead}>
+                {isRead ? 'Mark as Unread' : 'Mark as Read'}
+            </button>
+            <input
+                type="number"
+                value={rating}
+                onChange={(e) => handleRateBook(Number(e.target.value))}
+            />
         </div>
     );
 };

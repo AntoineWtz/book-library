@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-interface AddBookFormProps {
-    addBook: (book: any) => void;
+
+interface BookFormProps {
+    onAddBook: (book: any) => void;
 }
 
-const AddBookForm: React.FC<AddBookFormProps> = ({ addBook }) => {
+const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [genre, setGenre] = useState('');
@@ -19,7 +20,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ addBook }) => {
             isRead: false,
             rating: 0
         };
-        addBook(newBook);
+        onAddBook(newBook);
         setTitle('');
         setAuthor('');
         setGenre('');
@@ -57,4 +58,4 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ addBook }) => {
     );
 };
 
-export default AddBookForm;
+export default BookForm;
