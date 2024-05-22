@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddBookForm from './components/AddBookForm';
 import BookList from './components/BookList';
+import { loadBooks, saveBooks } from './utils/storage';
 
 interface Book {
   id: number;
@@ -14,17 +15,12 @@ interface Book {
 const App: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
-  // Charger les livres depuis le local storage au démarrage
   useEffect(() => {
-    const storedBooks = localStorage.getItem('books');
-    if (storedBooks) {
-      setBooks(JSON.parse(storedBooks));
-    }
+    setBooks(loadBooks());
   }, []);
 
-  // Sauvegarder les livres dans le local storage à chaque mise à jour
   useEffect(() => {
-    localStorage.setItem('books', JSON.stringify(books));
+    saveBooks(books);
   }, [books]);
 
   const addBook = (book: Book) => {
