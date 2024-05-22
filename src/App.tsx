@@ -16,7 +16,8 @@ const App: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    setBooks(loadBooks());
+    const storedBooks = loadBooks();
+    setBooks(storedBooks);
   }, []);
 
   useEffect(() => {
@@ -24,15 +25,15 @@ const App: React.FC = () => {
   }, [books]);
 
   const addBook = (book: Book) => {
-    setBooks([...books, book]);
+    setBooks(prevBooks => [...prevBooks, book]);
   };
 
   const toggleReadStatus = (id: number) => {
-    setBooks(books.map(book => book.id === id ? { ...book, isRead: !book.isRead } : book));
+    setBooks(prevBooks => prevBooks.map(book => book.id === id ? { ...book, isRead: !book.isRead } : book));
   };
 
   const rateBook = (id: number, rating: number) => {
-    setBooks(books.map(book => book.id === id ? { ...book, rating } : book));
+    setBooks(prevBooks => prevBooks.map(book => book.id === id ? { ...book, rating } : book));
   };
 
   return (

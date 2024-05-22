@@ -2,7 +2,14 @@ import React from 'react';
 import BookCard from './BookCard';
 
 interface BookListProps {
-    books: any[];
+    books: {
+        id: number;
+        title: string;
+        author: string;
+        isRead: boolean;
+        rating: number;
+        genre?: string;
+    }[];
     toggleReadStatus: (id: number) => void;
     rateBook: (id: number, rating: number) => void;
 }
@@ -10,7 +17,7 @@ interface BookListProps {
 const BookList: React.FC<BookListProps> = ({ books, toggleReadStatus, rateBook }) => {
     return (
         <div className="flex flex-wrap justify-center">
-            {books.map((book) => (
+            {books.map((book, index) => (
                 <BookCard
                     key={book.id}
                     book={book}
