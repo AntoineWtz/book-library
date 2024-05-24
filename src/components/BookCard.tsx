@@ -26,7 +26,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook })
 
     return (
         <div className="border border-cyan-300 rounded-md p-4 m-2 bg-cyan-100">
-            <h3 className='font-bold text-center'>{title}</h3>
+            <h3 className='font-bold text-center text-sky-950'>{title}</h3>
             <p>Author : {author}</p>
             <p>Genre : {genre}</p>
             <p className='text-center'>{isRead ? 'Read' : 'Unread'}</p>
