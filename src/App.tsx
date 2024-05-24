@@ -74,8 +74,8 @@ const App: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-4">My Book Library</h1>
-      <div className="flex justify-between items-center mb-4">
+      <h1 className="text-4xl font-bold m-4 text-center">My Book Library</h1>
+      <div className="flex justify-around items-center mb-4">
         <div>
           <label htmlFor="filter" className="mr-2">Filter:</label>
           <select id="filter" className="p-2 border border-gray-300 rounded-md" value={filter} onChange={handleFilterChange}>
