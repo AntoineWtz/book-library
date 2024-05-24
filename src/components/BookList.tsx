@@ -6,7 +6,7 @@ import { Book } from '../types';
 interface BookListProps {
     books: Book[];
     onToggleRead: (id: number) => void;
-    onDeleteBook: (id: number) => void; 
+    onDeleteBook: (id: number) => void;
 }
 
 const BookList: React.FC<BookListProps> = ({ books, onToggleRead, onDeleteBook }) => {
@@ -17,7 +17,7 @@ const BookList: React.FC<BookListProps> = ({ books, onToggleRead, onDeleteBook }
                     key={book.id}
                     book={book}
                     onToggleRead={onToggleRead}
-                    onDeleteBook={onDeleteBook} 
+                    onDeleteBook={onDeleteBook}
                 />
             ))}
         </div>

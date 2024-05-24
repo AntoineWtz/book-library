@@ -51,7 +51,7 @@ const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
                 placeholder="Genre"
                 className="p-2 border border-gray-300 rounded-md w-64"
             />
-            <button type="submit" className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+            <button type="submit" className="p-2 bg-sky-500 text-white rounded-md hover:bg-sky-800">
                 Add Book
             </button>
         </form>
