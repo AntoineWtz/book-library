@@ -10,35 +10,33 @@ interface BookCardProps {
         genre?: string;
     };
     onToggleRead: (id: number) => void;
-    onRateBook: (id: number, rating: number) => void;
+    onDeleteBook: (id: number) => void;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onRateBook }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook }) => {
     const { id, title, author, isRead, rating, genre } = book;
 
     const handleToggleRead = () => {
         onToggleRead(id);
     };
 
-    const handleRateBook = (newRating: number) => {
-        onRateBook(id, newRating);
+    const handleDeleteBook = () => {
+        onDeleteBook(id);
     };
 
     return (
         <div className="border border-gray-300 rounded-md p-4 m-2">
-            <h3>{title}</h3>
-            <p>Author: {author}</p>
-            <p>Genre: {genre}</p>
-            <p>Rating: {rating}</p>
-            <button onClick={handleToggleRead}>
-                {isRead ? 'Mark as Unread' : 'Mark as Read'}
-            </button>
-            <input
-                type="number"
-                value={rating}
-                onChange={(e) => handleRateBook(Number(e.target.value))}
-            />
-        </div>
+            <h3 className='font-bold text-center'>{title}</h3>
+            <p>Author : {author}</p>
+            <p>Genre : {genre}</p>
+            <p className='text-center'>{isRead ? 'Read' : 'Unread'}</p>
+            <div className='flex flex-col'>
+                <button onClick={handleToggleRead}>
+                    {isRead ? 'Mark as Unread' : 'Mark as Read'}
+                </button>
+                <button className='text-red-400 hover:text-red-600' onClick={handleDeleteBook}>Delete</button>
+            </div>
+        </div >
     );
 };
 

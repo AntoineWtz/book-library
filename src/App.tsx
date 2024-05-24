@@ -19,8 +19,12 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    filterBooks();
-  }, [filter, searchTerm]);
+    const savedBooks = getBooks();
+    if (savedBooks) {
+      setBooks(savedBooks);
+      setFilteredBooks(savedBooks);
+    }
+  }, []);
 
   const filterBooks = () => {
     let filtered: Book[] = [];
@@ -56,17 +60,15 @@ const App: React.FC = () => {
     saveBooks(updatedBooks);
   };
 
-  const handleToggleRead = (id: number) => {
-    const updatedBooks = books.map(book =>
-      book.id === id ? { ...book, isRead: !book.isRead } : book
-    );
+  const handleDeleteBook = (id: number) => {
+    const updatedBooks = books.filter(book => book.id !== id);
     setBooks(updatedBooks);
     saveBooks(updatedBooks);
   };
 
-  const handleRateBook = (id: number, rating: number) => {
+  const handleToggleRead = (id: number) => {
     const updatedBooks = books.map(book =>
-      book.id === id ? { ...book, rating } : book
+      book.id === id ? { ...book, isRead: !book.isRead } : book
     );
     setBooks(updatedBooks);
     saveBooks(updatedBooks);
@@ -95,7 +97,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <BookForm onAddBook={handleAddBook} />
-      <BookList books={filteredBooks} onToggleRead={handleToggleRead} onRateBook={handleRateBook} />
+      <BookList books={filteredBooks} onToggleRead={handleToggleRead} onDeleteBook={handleDeleteBook} />
     </div>
   );
 };
