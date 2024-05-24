@@ -25,7 +25,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook })
     };
 
     return (
-        <div className="border border-gray-300 rounded-md p-4 m-2">
+        <div className="border border-cyan-300 rounded-md p-4 m-2 bg-cyan-100">
             <h3 className='font-bold text-center'>{title}</h3>
             <p>Author : {author}</p>
             <p>Genre : {genre}</p>
@@ -34,7 +34,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook })
                 <button onClick={handleToggleRead}>
                     {isRead ? 'Mark as Unread' : 'Mark as Read'}
                 </button>
-                <button className='text-red-400 hover:text-red-600' onClick={handleDeleteBook}>Delete</button>
+                <button className='text-rose-400 hover:text-rose-600' onClick={handleDeleteBook}>Delete</button>
             </div>
         </div >
     );
