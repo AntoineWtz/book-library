@@ -10,18 +10,18 @@ interface BookCardProps {
         genre?: string;
     };
     onToggleRead: (id: number) => void;
-    onRateBook: (id: number, rating: number) => void;
+    onDeleteBook: (id: number) => void;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onRateBook }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook }) => {
     const { id, title, author, isRead, rating, genre } = book;
 
     const handleToggleRead = () => {
         onToggleRead(id);
     };
 
-    const handleRateBook = (newRating: number) => {
-        onRateBook(id, newRating);
+    const handleDeleteBook = () => {
+        onDeleteBook(id);
     };
 
     return (
@@ -29,16 +29,14 @@ const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onRateBook }) =
             <h3>{title}</h3>
             <p>Author: {author}</p>
             <p>Genre: {genre}</p>
-            <p>Rating: {rating}</p>
-            <button onClick={handleToggleRead}>
-                {isRead ? 'Mark as Unread' : 'Mark as Read'}
-            </button>
-            <input
-                type="number"
-                value={rating}
-                onChange={(e) => handleRateBook(Number(e.target.value))}
-            />
-        </div>
+            <p>{isRead ? 'Read' : 'Unread'}</p>
+            <div>
+                <button onClick={handleToggleRead}>
+                    {isRead ? 'Mark as Unread' : 'Mark as Read'}
+                </button>
+            </div>
+            <button onClick={handleDeleteBook}>Delete</button>
+        </div >
     );
 };
 

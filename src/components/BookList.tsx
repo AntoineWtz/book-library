@@ -6,10 +6,10 @@ import { Book } from '../types';
 interface BookListProps {
     books: Book[];
     onToggleRead: (id: number) => void;
-    onRateBook: (id: number, rating: number) => void;
+    onDeleteBook: (id: number) => void; 
 }
 
-const BookList: React.FC<BookListProps> = ({ books, onToggleRead, onRateBook }) => {
+const BookList: React.FC<BookListProps> = ({ books, onToggleRead, onDeleteBook }) => {
     return (
         <div className="flex flex-wrap justify-center">
             {books.map((book, index) => (
@@ -17,7 +17,7 @@ const BookList: React.FC<BookListProps> = ({ books, onToggleRead, onRateBook }) 
                     key={book.id}
                     book={book}
                     onToggleRead={onToggleRead}
-                    onRateBook={onRateBook}
+                    onDeleteBook={onDeleteBook} 
                 />
             ))}
         </div>
