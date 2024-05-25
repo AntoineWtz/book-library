@@ -23,7 +23,7 @@ The Book Library app allows users to manage their personal library of books. Use
 
 ## File Structure
 
-* `src/components/AddBookForm.tsx`: Form component to add a new book.
+* `src/components/BookForm.tsx`: Form component to add a new book.
 * `src/components/BookList.tsx`: Component to display the list of books.
 * `src/components/BookCard.tsx`: Component to display individual book details.
 
