@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import BookList from './components/BookList';
 import BookForm from './components/BookForm';
 import { Book } from './types';
@@ -18,22 +18,13 @@ const App: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const savedBooks = getBooks();
-    if (savedBooks) {
-      setBooks(savedBooks);
-      setFilteredBooks(savedBooks);
-    }
-  }, []);
+  const filterBooks = useCallback(() => {
+    let filtered = books;
 
-  const filterBooks = () => {
-    let filtered: Book[] = [];
-    if (filter === 'all') {
-      filtered = books;
-    } else if (filter === 'read') {
-      filtered = books.filter(book => book.isRead);
+    if (filter === 'read') {
+      filtered = filtered.filter(book => book.isRead);
     } else if (filter === 'unread') {
-      filtered = books.filter(book => !book.isRead);
+      filtered = filtered.filter(book => !book.isRead);
     }
 
     if (searchTerm) {
@@ -44,7 +35,11 @@ const App: React.FC = () => {
     }
 
     setFilteredBooks(filtered);
-  };
+  }, [books, filter, searchTerm]);
+
+  useEffect(() => {
+    filterBooks();
+  }, [filter, searchTerm, books, filterBooks]);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
@@ -60,12 +55,6 @@ const App: React.FC = () => {
     saveBooks(updatedBooks);
   };
 
-  const handleDeleteBook = (id: number) => {
-    const updatedBooks = books.filter(book => book.id !== id);
-    setBooks(updatedBooks);
-    saveBooks(updatedBooks);
-  };
-
   const handleToggleRead = (id: number) => {
     const updatedBooks = books.map(book =>
       book.id === id ? { ...book, isRead: !book.isRead } : book
@@ -74,12 +63,19 @@ const App: React.FC = () => {
     saveBooks(updatedBooks);
   };
 
+  const handleDeleteBook = (id: number) => {
+    const updatedBooks = books.filter(book => book.id !== id);
+    setBooks(updatedBooks);
+    saveBooks(updatedBooks);
+  };
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold m-4 text-center text-sky-950">My Book Library</h1>
-      <div className="flex justify-evenly items-center m-4">
+      <h1 className="text-4xl font-bold m-4 text-center">My Book Library</h1>
+      <p className=" m-4 text-center">Add and manage your books collection</p>
+      <div className="flex flex-col md:flex-row justify-evenly items-center mb-4 space-y-2 md:space-y-0">
         <div>
-          <label htmlFor="filter" className="mr-2">Filter:</label>
+          <label htmlFor="filter" className="mr-2">Filter :</label>
           <select id="filter" className="p-2 border border-gray-300 rounded-md" value={filter} onChange={handleFilterChange}>
             <option value="all">All</option>
             <option value="read">Read</option>
