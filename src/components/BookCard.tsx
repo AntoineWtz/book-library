@@ -21,7 +21,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook })
     };
 
     return (
-        <div className="border border-cyan-300 rounded-xl p-4 m-2 relative bg-cyan-50 hover:bg-cyan-100">
+        <div className="border border-cyan-300 rounded-xl p-4 m-2 relative bg-cyan-50 hover:bg-cyan-100 hover:scale-105">
             <h3 className="text-lg font-bold">{title}</h3>
             <p className="text-sm">Author : {author}</p>
             <p className="text-sm">Genre : {genre}</p>
