@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 interface BookFormProps {
     onAddBook: (book: any) => void;
 }
@@ -27,7 +26,7 @@ const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mb-4 flex flex-col items-center space-y-2">
+        <form onSubmit={handleSubmit} className="m-4 flex flex-col items-center space-y-2">
             <input
                 type="text"
                 value={title}

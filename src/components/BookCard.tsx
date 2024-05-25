@@ -1,20 +1,16 @@
 import React from 'react';
+import { Book } from '../types';
+import { FaCheckCircle } from 'react-icons/fa';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 interface BookCardProps {
-    book: {
-        id: number;
-        title: string;
-        author: string;
-        isRead: boolean;
-        rating: number;
-        genre?: string;
-    };
+    book: Book;
     onToggleRead: (id: number) => void;
     onDeleteBook: (id: number) => void;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook }) => {
-    const { id, title, author, isRead, rating, genre } = book;
+    const { id, title, author, isRead, genre } = book;
 
     const handleToggleRead = () => {
         onToggleRead(id);
@@ -25,18 +21,17 @@ const BookCard: React.FC<BookCardProps> = ({ book, onToggleRead, onDeleteBook })
     };
 
     return (
-        <div className="border border-cyan-300 rounded-md p-4 m-2 bg-cyan-100">
-            <h3 className='font-bold text-center text-sky-950'>{title}</h3>
-            <p>Author : {author}</p>
-            <p>Genre : {genre}</p>
-            <p className='text-center'>{isRead ? 'Read' : 'Unread'}</p>
-            <div className='flex flex-col'>
-                <button onClick={handleToggleRead}>
-                    {isRead ? 'Mark as Unread' : 'Mark as Read'}
+        <div className="border border-cyan-300 rounded-xl p-4 m-2 relative bg-cyan-50 hover:bg-cyan-100">
+            <h3 className="text-lg font-bold">{title}</h3>
+            <p className="text-sm">Author : {author}</p>
+            <p className="text-sm">Genre : {genre}</p>
+            <div className="absolute bottom-4 right-4 flex items-center">
+                <button onClick={handleToggleRead} className="text-xl">
+                    {isRead ? <FaCheckCircle className="text-green-500" /> : <AiOutlineCloseCircle className="text-gray-800" />}
                 </button>
-                <button className='text-rose-400 hover:text-rose-600' onClick={handleDeleteBook}>Delete</button>
             </div>
-        </div >
+            <button onClick={handleDeleteBook} className="m-2 text-red-500 hover:text-red-700">Delete</button>
+        </div>
     );
 };
 
